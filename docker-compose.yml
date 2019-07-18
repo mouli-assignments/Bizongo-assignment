@@ -1,0 +1,20 @@
+#verion of docker compose we wanted to use with this file
+version: '3'
+#services which we wanted to use and which we wanted to form as container
+services: 
+  redis-server:
+   image: 'redis'
+   # we wanted our node app should be build using the docker file in the current directory.
+  nginx:
+    restart: always
+    build: 
+      dockerfile: Dockerfile
+      context: ./ngnix
+    ports:
+     - '80:80'
+  node-app:
+    build: .
+    # - in yml specified an array, we cna technially many different ports
+    environment: 
+      - visit-count=visits
+
